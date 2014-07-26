@@ -1,0 +1,21 @@
+{
+  "name": "MEAN-based-app",
+  "version": "0.0.1",
+  "homepage": "https://github.com/akorchan/MEAN-based-app",
+  "authors": [
+    "Andrey Korchan <gprogramador@gmail.com>"
+  ],
+  "main": "app.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.12",
+    "angular-route": "~1.2.12"
+  }
+}
