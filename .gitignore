@@ -25,3 +25,18 @@ build/Release
 node_modules
 
 public/bower_components
+
+project/project
+project/target
+target
+tmp
+.history
+dist
+/.idea
+/*.iml
+/out
+/.idea_modules
+/.classpath
+/.project
+/RUNNING_PID
+/.settings
