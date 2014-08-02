@@ -1,15 +1,16 @@
+'use strict';
 
 /**
  * Module dependencies.
  */
 
 var express = require('express');
-var routes = require('./routes');
 var http = require('http');
 var path = require('path');
 var mongoose = require('mongoose');
 
 var app = express();
+require('./config/api-routes-config')(app);
 
 // all environments
 app.set('port', process.env.PORT || 3000);
