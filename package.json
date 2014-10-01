@@ -1,13 +1,14 @@
 {
-  "name": "MEAN-based-app",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "start": "node app.js"
-  },
-  "dependencies": {
-    "express": "3.4.8",
-    "jade": "*",
-    "mongoose": "~3.8.7"
-  }
+    "name": "MEAN-based-app",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "node server.js",
+        "postinstall": "bower install"
+    },
+    "dependencies": {
+        "express": "3.4.8",
+        "jade": "*",
+        "mongoose": "~3.8.7"
+    }
 }
