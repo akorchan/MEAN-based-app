@@ -3,12 +3,25 @@
 var util = require('util');
 var http = require('http');
 
-var wiktionaryUrlPattern = "http://%s.wiktionary.org/w/index.php?action=raw&title=%s";
+var wiktionaryFindWord = "http://%s.wiktionary.org/w/index.php?action=raw&title=%s";
+var wiktionaryOpenSearch = "http://%s.wiktionary.org/w/api.php?action=opensearch&search=%s";
 
 function meaning(language, word, successCallback, failureCallback) {
     performRequest(util.format(wiktionaryUrlPattern, language, word), function (body) {
         if (body !== '') {
             successCallback(cleanupResultsArray(parseWikiResponse(body, parsingItemMapTranslations.meaning[language])));
+        }
+        else {
+            failureCallback();
+        }
+    });
+}
+
+function openSearch(language, word, successCallback, failureCallback) {
+    performRequest(util.format(wiktionaryOpenSearch, language, word), function (body) {
+        if (body !== '') {
+            console.log(body);
+//            successCallback(cleanupResultsArray(parseWikiResponse(body, parsingItemMapTranslations.meaning[language])));
         }
         else {
             failureCallback();
@@ -53,5 +66,6 @@ var parsingItemMapTranslations = {
 }
 
 exports.meaning = meaning;
+exports.openSearch = openSearch;
 
 
