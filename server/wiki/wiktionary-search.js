@@ -3,10 +3,16 @@
 var util = require('util');
 var http = require('http');
 
-function meaning(language, word) {
-    var url = util.format("http://%s.wiktionary.org/w/index.php?action=raw&title=%s", language, word);
-    performRequest(url, function (body) {
-        parseWikiResponse(body, parsingItemMapTranslations.meaning[language]);
+var wiktionaryUrlPattern = "http://%s.wiktionary.org/w/index.php?action=raw&title=%s";
+
+function meaning(language, word, successCallback, failureCallback) {
+    performRequest(util.format(wiktionaryUrlPattern, language, word), function (body) {
+        if (body !== '') {
+            successCallback(cleanupResultsArray(parseWikiResponse(body, parsingItemMapTranslations.meaning[language])));
+        }
+        else {
+            failureCallback();
+        }
     });
 }
 
@@ -32,8 +38,12 @@ function parseWikiResponse(textToParse, parsedElement) {
     var regex = new RegExp('(' + parsedElement + '\\s*={3,4})(\\s.*?)+(={3,4})');
     var found = textToParse.match(regex)[0];
     var results = found.split('#');
-    results = results.slice(1, results.length - 1);
-    console.log(results);
+    return results.slice(1, results.length - 1);
+}
+
+function cleanupResultsArray(results) {
+    //TODO remove redundant symbols
+    return results;
 }
 
 var parsingItemMapTranslations = {

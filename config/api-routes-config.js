@@ -1,7 +1,7 @@
 'use strict';
 
-var examplesController = require('../server/api-controllers/examples.js');
+var wordsController = require('../server/api-controllers/words.js');
 
 module.exports = function (app) {
-    app.get('/example/action/:value', examplesController.getSimpleData);
+    app.get('/words/:word/:lang', wordsController.getMeaning);
 };
