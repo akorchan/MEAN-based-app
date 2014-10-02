@@ -7,7 +7,7 @@ var wiktionaryFindWord = "http://%s.wiktionary.org/w/index.php?action=raw&title=
 var wiktionaryOpenSearch = "http://%s.wiktionary.org/w/api.php?action=opensearch&search=%s";
 
 function meaning(language, word, successCallback, failureCallback) {
-    performRequest(util.format(wiktionaryUrlPattern, language, word), function (body) {
+    performRequest(util.format(wiktionaryFindWord, language, word), function (body) {
         if (body !== '') {
             successCallback(cleanupResultsArray(parseWikiResponse(body, parsingItemMapTranslations.meaning[language])));
         }

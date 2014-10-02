@@ -1,12 +1,13 @@
 'use strict';
 
 angular.module('app', ['ngRoute', 'app.controllers', 'app.services'])
-    .config(function ($routeProvider) {
+    .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {templateUrl: '/views/main.html', controller: 'MainController'})
             .when('/words', {templateUrl: '/views/words.html', controller: 'WordsController'})
             .otherwise({ redirectTo: '/404'});
-    });
+        $locationProvider.html5Mode(true);
+    }]);
 
 /** constants */
 angular.module('app.constants', []);
