@@ -47,14 +47,18 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <h1>Scrolling Nav</h1>
-                <p><strong>Usage Instructions:</strong> Make sure to include the <code>scrolling-nav.js</code>, <code>jquery.easing.min.js</code>,
-                    and <code>scrolling-nav.css</code> files. To make a link smooth scroll to another section on the
-                    page, give the link the <code>.page-scroll</code> class and set the link target to a corresponding
-                    ID on the page.</p>
                 <a class="btn btn-default page-scroll" href="#about">Click Me to Scroll Down!</a>
-                <!--<div ng-view></div>-->
-                <h1>Welcome to the {{ welcome }}</h1>
+                <pre>Model: {{selected| json}}</pre>
+                <pre>Original ({{words2.length}}):  {{words2}}</pre>
+                <pre>After check ({{words.length}}): {{words}}</pre>
+                <input type="text" ng-change="onedit()" ng-model="selected"
+                       typeahead="words for words in words | filter:$viewValue">
+                <div>
+                    <button type="button" class="btn btn-info btn-sm" ng-repeat="word in words"
+                            style="margin: 5px">
+                        {{ word }}
+                    </button>
+                </div>
 
             </div>
         </div>
@@ -67,6 +71,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1>About Section</h1>
+
+                <div ng-view></div>
             </div>
         </div>
     </div>
@@ -99,6 +105,7 @@
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/jquery.easing/js/jquery.easing.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 <script src="scripts/utils/scrolling-nav.js"></script>
 
 <script src="scripts/app.js"></script>

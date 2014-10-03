@@ -19,14 +19,14 @@ exports.getMeaning = function (req, res) {
     var word = req.query.word;
     var lang = req.query.lang;
     if ((typeof(word) === 'undefined') || (typeof(lang) === 'undefined')) {
-        res.send('GET parameters were not passed.')
+        res.status(400).send('GET parameters were not passed.')
         return;
     }
     wiktionarySearch.meaning(lang, word,
         function (results) {
             res.send(results);
         }, function () {
-            res.send('Can not find word [' + word + '] for language [' + lang + '].');
+            res.status(204).send('Can not find word [' + word + '] for language [' + lang + '].');
         });
 };
 
