@@ -12,9 +12,8 @@ angular.module('app.controllers').controller('MainController', function ($scope,
             console.log(searchingData + ' : ' + searchingData);
             if (angular.isArray(searchingData)) {
                 $scope.words = [];
-                var sequence = Promise.resolve();
-                searchingData.forEach(function (word) {
-                    sequence = sequence.then(function () {
+                searchingData.reduce(function (sequence, word) {
+                    return sequence.then(function () {
                         return WordsService.getMeaningSync(word, 'ru')
                     }).then(function (meaning) {
                             if (meaning.length > 0) {
@@ -23,7 +22,7 @@ angular.module('app.controllers').controller('MainController', function ($scope,
                                 console.log(word + "-" + meaning);
                             }
                         });
-                });
+                }, Promise.resolve());
             }
         });
 
