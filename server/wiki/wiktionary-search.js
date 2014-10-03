@@ -9,6 +9,12 @@ var wiktionaryOpenSearch = "http://%s.wiktionary.org/w/api.php?action=opensearch
 function meaning(language, word, successCallback, failureCallback) {
     performRequest(util.format(wiktionaryFindWord, language, word), function (body) {
         if (body !== '') {
+            console.log("==================================");
+            console.log(word)
+            console.log(body)
+            console.log("------------------------------------")
+            console.log(parseWikiResponse(body, parsingItemMapTranslations.meaning[language]))
+            console.log("==================================");
             successCallback(cleanupResultsArray(parseWikiResponse(body, parsingItemMapTranslations.meaning[language])));
         }
         else {
@@ -46,12 +52,16 @@ function performRequest(url, callback) {
 }
 
 function parseWikiResponse(textToParse, parsedElement) {
-    var str = "For more information, see Chapter 3.4.5.1";
     var regex = new RegExp('(' + parsedElement + '\\s*={3,4})(\\s.*?)+(={3,4})');
     var found = textToParse.match(regex);
     if (found !== null) {
         var results = found[0].split('#');
-        return results.slice(1, results.length - 1);
+        if (results.length > 2) {
+            return results.slice(1, results.length - 1);
+        }
+        if (results.length = 2) {
+            return results.slice(1);
+        }
     }
     return [];
 }
