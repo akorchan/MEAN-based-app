@@ -4,9 +4,9 @@ angular.module('app', ['ngRoute', 'app.controllers', 'app.services'])
     .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {templateUrl: '/views/main.html', controller: 'MainController'})
-            .when('/words', {templateUrl: '/views/words.html', controller: 'WordsController'})
+            .when('/words/:word?', {templateUrl: '/views/words.html', controller: 'WordsController'})
             .otherwise({ redirectTo: '/404'});
-        $locationProvider.html5Mode(true);
+//        $locationProvider.html5Mode(true);
     }]);
 
 /** constants */

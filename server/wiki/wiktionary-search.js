@@ -9,12 +9,6 @@ var wiktionaryOpenSearch = "http://%s.wiktionary.org/w/api.php?action=opensearch
 function meaning(language, word, successCallback, failureCallback) {
     performRequest(util.format(wiktionaryFindWord, language, word), function (body) {
         if (body !== '') {
-            console.log("==================================");
-            console.log(word)
-            console.log(body)
-            console.log("------------------------------------")
-            console.log(parseWikiResponse(body, parsingItemMapTranslations.meaning[language]))
-            console.log("==================================");
             successCallback(cleanupResultsArray(parseWikiResponse(body, parsingItemMapTranslations.meaning[language])));
         }
         else {

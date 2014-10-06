@@ -57,11 +57,8 @@
                        class="form-control" style="height:60px; font-size:30px">
 
                 <div>
-                    <button type="button" class="btn btn-info" ng-repeat="word in words"
-                            style="margin: 10px 3px 10px 3px;">
-                        {{ word }}
-                    </button>
-
+                    <a ng-repeat="word in words" class="btn btn-info" href="#/words?word={{ word }}"
+                       style="margin: 10px 3px 10px 3px;">{{ word }}</a>
                 </div>
 
             </div>
