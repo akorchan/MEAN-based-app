@@ -61,8 +61,6 @@ nav {
     top: 0;
     left: 0;
     right: 0;
-    background: #fff;
-    background: rgba(255, 255, 255, 0.8);
 }
 nav li, nav ul {
     list-style: none;
@@ -78,9 +76,17 @@ nav a {
     color: #212121;
     text-decoration: none;
 }
-a:hover {
-    background: #fff;
+
+nav a:hover {
+    background: #9dc4ff;
+    text-decoration: none;
 }
 a.active {
     background: #9dc4ff;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #333333;
+    background-color: #e8e8e8;
 }
