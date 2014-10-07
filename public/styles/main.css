@@ -6,6 +6,8 @@ http://startbootstrap.com/template-overviews/agency/
 body {
     width: 100%;
     height: 100%;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    letter-spacing: 1px;
 }
 
 html {
@@ -20,10 +22,7 @@ html {
     padding-top: 150px;
     text-align: center;
     background: #fff;
-
-
     text-align: center;
-    color: #fff;
     background-attachment: scroll;
     background-image: url(../images/search-background.jpg);
     background-position: center center;
@@ -65,8 +64,27 @@ html {
         transition: background .5s ease-in-out, padding .5s ease-in-out;
     }
 
+    .navbar-default {
+        padding: 25px 0;
+        border: 0;
+        background-color: rgba(51, 51, 51, 0.5);
+        -webkit-transition: padding .3s;
+        -moz-transition: padding .3s;
+        transition: padding .3s;
+    }
+
     .top-nav-collapse {
         padding: 0;
+        border-color: transparent;
+        background-color: #222;
+    }
+
+    .navbar-default .navbar-brand {
+        font-size: 2em;
+        -webkit-transition: all .3s;
+        -moz-transition: all .3s;
+        transition: all .3s;
+        color: #f6bf01;
     }
 }
 
@@ -82,7 +100,9 @@ nav li, nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
-    text-align: center
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff;
 }
 
 nav li, nav a {
@@ -96,12 +116,24 @@ nav a {
 }
 
 nav a:hover {
-    background: #9dc4ff;
+    background: #f6bf01;
     text-decoration: none;
 }
 
 a.active {
-    background: #9dc4ff;
+    background: #f6bf01;
+    color: #222;
+}
+
+.secondary-nav a {
+    color: #222;
+}
+
+.secondary-nav {
+    background-color: rgba(51, 51, 51, 0.8);
+    background:
+        -webkit-gradient(radial, 50% 50%, 50, 50% 50%, 310,
+        from(rgba(255, 255, 255, 0.7)), to(rgba(0, 0, 0, 0)));
 }
 
 .navbar-default .navbar-nav > li > a:hover,
@@ -110,15 +142,10 @@ a.active {
     background-color: #e8e8e8;
 }
 
-header {
-    text-align: center;
-    color: #fff;
-    background-attachment: scroll;
-    background-image: url(../images/search-background.jpg);
-    background-position: center center;
-    background-repeat: none;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
+.navbar-default .navbar-nav>li>a {
+    color: #f6bf01;
+}
+
+.navbar-default .navbar-nav>li>a.active {
+    color: #222;
 }
