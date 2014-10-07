@@ -19,4 +19,4 @@ angular.module('app.services', ['app.constants']);
 angular.module('app.directives', []);
 
 /** controllers module initialization, allows adding controllers to module in multiple files */
-angular.module('app.controllers', ['app.services', 'app.directives']);
+angular.module('app.controllers', ['app.services', 'app.directives', 'duScroll']);

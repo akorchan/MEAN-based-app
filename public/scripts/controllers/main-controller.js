@@ -1,7 +1,7 @@
 'use strict';
 
 /** Controllers */
-angular.module('app.controllers').controller('MainController', function ($scope, WordsService) {
+angular.module('app.controllers').controller('MainController', function ($scope, $document, WordsService) {
     $scope.selected = undefined;
     $scope.words = [];
 //    var isAutocompelteEnabled = true;
@@ -33,4 +33,14 @@ angular.module('app.controllers').controller('MainController', function ($scope,
 //        }
     }
 
-});
+    $scope.toTheTop = function() {
+        $document.scrollTopAnimated(0).then(function() {
+            console && console.log('You just scrolled to the top!');
+        });
+    }
+    var section2 = angular.element(document.getElementById('section-2'));
+    $scope.toSection2 = function() {
+        $document.scrollToElementAnimated(section2);
+    }
+
+}).value('duScrollOffset', 30);

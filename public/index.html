@@ -1,112 +1,122 @@
 <html>
 <head>
     <title>MEAN boilerplate</title>
-    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap-bower/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="styles/main.css">
 </head>
+
+
+
 <body ng-app='app' id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand page-scroll" href="#page-top">Start Bootstrap</a>
-        </div>
+<div ng-controller="MainController">
+    <!--<nav class="navbar navbar-default navbar-fixed-top">-->
+        <!--<div class="container">-->
+        <!--<div class="navbar-header page-scroll">-->
+            <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">-->
+                <!--<span class="sr-only">Toggle navigation</span>-->
+            <!--</button>-->
+            <!--<a class="navbar-brand page-scroll" href="#" ng-click="toTheTop()">Start Bootstrap</a>-->
+        <!--</div>-->
+        <!--<ul>-->
+            <!--<li><a class="page-scroll hidden"  href="#section-1" du-smooth-scroll du-scrollspy>Section 1</a></li>-->
+            <!--<li><a class="page-scroll"  href="#section-2" du-smooth-scroll du-scrollspy>Section 2</a></li>-->
+            <!--<li><a class="page-scroll"  href="#section-3" du-smooth-scroll du-scrollspy>Section 3</a></li>-->
+            <!--<li><a class="page-scroll"  href="#section-4" du-smooth-scroll du-scrollspy>Section 4</a></li>-->
+        <!--</ul>-->
+            <!--</div>-->
+    <!--</nav>-->
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav">
-                <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-                <li class="hidden">
-                    <a class="page-scroll" href="#page-top"></a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="#about">About</a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="#services">Services</a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="#contact">Contact</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#" ng-click="toTheTop()">Start Bootstrap</a>
+            </div>
 
-<!-- Intro Section -->
-<section ng-controller="MainController" id="intro" class="intro-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <ul class="nav nav-pills pull-right" style="margin: 10px">
-                    <li><a class="page-scroll" href="#about">Последние доабвленные</a></li>
-                    <li><a class="page-scroll" href="#about">Последние понравившиеся</a></li>
-                    <li><a class="page-scroll" href="#about">Самые популярные!</a></li>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="navbar-nav">
+                    <li><a class="page-scroll hidden"  href="#section-1" du-smooth-scroll du-scrollspy>Section 1</a></li>
+                    <li><a class="page-scroll"  href="#section-2" du-smooth-scroll du-scrollspy>Section 2</a></li>
+                    <li><a class="page-scroll"  href="#section-3" du-smooth-scroll du-scrollspy>Section 3</a></li>
+                    <li><a class="page-scroll"  href="#section-4" du-smooth-scroll du-scrollspy>Section 4</a></li>
                 </ul>
-                <input type="text" ng-change="onedit()" ng-model="selected"
-                       typeahead="words for words in words | filter:$viewValue" placeholder="Найди свое слово"
-                       class="form-control" style="height:60px; font-size:30px">
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
 
-                <div>
-                    <a ng-repeat="word in words" class="btn btn-info" href="#/words?word={{ word }}"
-                       style="margin: 10px 3px 10px 3px;">{{ word }}</a>
+    <!-- Intro Section -->
+    <section id="section-1" class="intro-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="nav nav-pills pull-right" style="margin: 10px">
+                        <li><a class="page-scroll" href="#about">Последние доабвленные</a></li>
+                        <li><a class="page-scroll" href="#about">Последние понравившиеся</a></li>
+                        <li><a class="page-scroll" href="#about">Самые популярные!</a></li>
+                    </ul>
+                    <input type="text" ng-change="onedit()" ng-model="selected"
+                           typeahead="words for words in words | filter:$viewValue" placeholder="Найди свое слово"
+                           class="form-control" style="height:60px; font-size:30px">
+
+                    <div>
+                        <a ng-repeat="word in words" class="btn btn-info" href="#/words?word={{ word }}"
+                           style="margin: 10px 3px 10px 3px;">{{ word }}</a>
+                    </div>
+
                 </div>
-
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- About Section -->
-<section id="about" class="about-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1>About Section</h1>
-
-                <div ng-view></div>
+    <!-- About Section -->
+    <section id="section-2" class="about-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>About Section</h1>
+                    <button ng-click="toTheTop()">Take me back!</button> or <button ng-click="toSection2()">To section 2</button>
+                    <div ng-view></div>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Services Section -->
-<section id="services" class="services-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1>Services Section</h1>
+    <!-- Services Section -->
+    <section id="section-3" class="services-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Services Section</h1>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Contact Section -->
-<section id="contact" class="contact-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1>Contact Section</h1>
+    <!-- Contact Section -->
+    <section id="section-4" class="contact-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Contact Section</h1>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
+
 
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
-<script src="bower_components/jquery.easing/js/jquery.easing.min.js"></script>
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/bootstrap-bower/js/bootstrap.min.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script src="bower_components/angular-scroll/angular-scroll.min.js"></script>
 <script src="scripts/utils/scrolling-nav.js"></script>
 
 <script src="scripts/app.js"></script>
