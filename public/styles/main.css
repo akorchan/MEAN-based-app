@@ -75,13 +75,12 @@ nav li, nav a {
 }
 nav a {
     padding: 20px;
-    color: #333;
+    color: #212121;
     text-decoration: none;
 }
 a:hover {
     background: #fff;
 }
 a.active {
-    background: #00AC7F;
-    color: #fff;
+    background: #00baff;
 }
