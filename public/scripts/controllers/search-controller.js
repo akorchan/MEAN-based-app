@@ -1,11 +1,11 @@
 'use strict';
 
 /** Controllers */
-angular.module('app.controllers').controller('SearchController', function ($scope, WordsService) {
+angular.module('app.controllers').controller('SearchController', function ($scope, $document, WordsService) {
     $scope.selected = undefined;
     $scope.words = [];
 //    var isAutocompelteEnabled = true;
-    $scope.onedit = function () {
+    $scope.onEdit = function () {
 //        if (isAutocompelteEnabled) {
         $scope.words = [];
         WordsService.searchWords($scope.selected, 'ru', function (searchingData) {
@@ -32,5 +32,10 @@ angular.module('app.controllers').controller('SearchController', function ($scop
         });
 //        }
     }
+
+    $scope.gotoMeaning = function () {
+        $document.scrollToElementAnimated(angular.element(document.getElementById('meaning-section')));
+    }
+
 
 });

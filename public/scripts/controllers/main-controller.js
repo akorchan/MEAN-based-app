@@ -1,16 +1,20 @@
 'use strict';
 
 /** Controllers */
-angular.module('app.controllers').controller('MainController', function ($scope, $document) {
+angular.module('app.controllers').controller('MainController',function ($scope, $document) {
 
-    $scope.toTheTop = function() {
-        $document.scrollTopAnimated(0).then(function() {
+    $scope.showMeaning = false;
+
+    $scope.toTheTop = function () {
+        $document.scrollTopAnimated(0).then(function () {
             console && console.log('You just scrolled to the top!');
         });
     }
-    var section2 = angular.element(document.getElementById('section-2'));
-    $scope.toSection2 = function() {
-        $document.scrollToElementAnimated(section2);
-    }
+
+    $scope.$on('showMeaning', function () {
+        $scope.showMeaning = true;
+        $scope.$apply();
+        $document.scrollToElementAnimated(angular.element(document.getElementById('meaning-section')));
+    });
 
 }).value('duScrollOffset', 30);
