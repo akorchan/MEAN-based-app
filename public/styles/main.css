@@ -149,3 +149,20 @@ a.active {
 .navbar-default .navbar-nav>li>a.active {
     color: #222;
 }
+
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+    color: #ffd410;
+    background-color: transparent;
+}
+
+.btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .open .dropdown-toggle.btn-info {
+    color: #222;
+    background-color: #f6bf01;
+    border-color: #be9201;
+}
+
+.btn-info {
+    color: #222;
+    background-color: #ffde89;
+    border-color: #f6bf01;
+}
