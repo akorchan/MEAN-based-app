@@ -9,7 +9,7 @@ var wiktionaryOpenSearch = "http://%s.wiktionary.org/w/api.php?action=opensearch
 function meaning(language, word, successCallback, failureCallback) {
     performRequest(util.format(wiktionaryFindWord, language, word), function (body) {
         if (body !== '') {
-            successCallback(cleanupResultsArray(parseWikiResponse(body, parsingItemMapTranslations.meaning[language])));
+            successCallback(cleanupResultsArray(parseWikiResponse(parsreLanguagePart(body, language), parsingItemMapTranslations.meaning[language])));
         }
         else {
             failureCallback();
@@ -45,19 +45,40 @@ function performRequest(url, callback) {
     req.end();
 }
 
+
+function parsreLanguagePart(textToParse, lang) {
+    lang = 'ru';
+    var regex = new RegExp('({{-' + lang + '-}})(\\s.*?)+({{-[a-z]{2}-}})', 'g');
+    var arrayToReturn = [];
+    var found = [];
+    var foundedMatches = [];
+    while (found = regex.exec(textToParse)) {
+        foundedMatches.push(found[0]);
+    }
+//    return foundedMatches.join('XXXXXXX');
+    return textToParse;
+}
+
 function parseWikiResponse(textToParse, parsedElement) {
-    var regex = new RegExp('(' + parsedElement + '\\s*={3,4})(\\s.*?)+(={3,4})');
-    var found = textToParse.match(regex);
-    if (found !== null) {
-        var results = found[0].split('#');
-        if (results.length > 2) {
-            return results.slice(1, results.length - 1);
-        }
-        if (results.length = 2) {
-            return results.slice(1);
+    var regex = new RegExp('(' + parsedElement + '\\s*={3,4})(\\s.*?)+(={3,4})', 'g');
+    var arrayToReturn = [];
+    var found = [];
+    var foundedMatches = [];
+    while (found = regex.exec(textToParse)) {
+        foundedMatches.push(found[0]);
+    }
+    for (var i = 0; i < foundedMatches.length; i++) {
+        var match = foundedMatches[i];
+        if (match !== null) {
+            var results = match.split('# ');
+            if (results.length > 2) {
+                arrayToReturn.push(results.slice(1, results.length - 1));
+            } else if (results.length = 2) {
+                arrayToReturn.push(results.slice(1));
+            }
         }
     }
-    return [];
+    return arrayToReturn;
 }
 
 function cleanupResultsArray(results) {
