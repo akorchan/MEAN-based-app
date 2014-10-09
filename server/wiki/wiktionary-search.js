@@ -98,4 +98,12 @@ var parsingItemMapTranslations = {
 exports.meaning = meaning;
 exports.openSearch = openSearch;
 
+/*
+    testing regex: http://regex101.com/
+    words for testing:
+    наречеие - на двух языказ значение из разных частей речи (по два для каждого языка)
+    конформизм - одно значение
+    нонконформизм - три значение
+ */
+
 
