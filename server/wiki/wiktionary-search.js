@@ -47,34 +47,33 @@ function performRequest(url, callback) {
 
 
 function parsreLanguagePart(textToParse, lang) {
-    lang = 'ru';
-    var regex = new RegExp('({{-' + lang + '-}})(\\s.*?)+({{-[a-z]{2}-}})', 'g');
-    var arrayToReturn = [];
+    textToParse = textToParse + '{{-xx-}}'
     var found = [];
     var foundedMatches = [];
+    var regex = new RegExp('({{-' + lang + '-}})[\\s*\\S*]+?({{-[a-z]{2}-}}{0,1})', 'g');
     while (found = regex.exec(textToParse)) {
         foundedMatches.push(found[0]);
     }
-//    return foundedMatches.join('XXXXXXX');
-    return textToParse;
+    return foundedMatches.join('XXXXXXX');
 }
 
 function parseWikiResponse(textToParse, parsedElement) {
-    var regex = new RegExp('(' + parsedElement + '\\s*={3,4})(\\s.*?)+(={3,4})', 'g');
     var arrayToReturn = [];
     var found = [];
     var foundedMatches = [];
+    var regex = new RegExp('(' + parsedElement + '\\s*={3,4})(\\s.*?)+(={3,4})', 'g');
     while (found = regex.exec(textToParse)) {
         foundedMatches.push(found[0]);
     }
     for (var i = 0; i < foundedMatches.length; i++) {
         var match = foundedMatches[i];
+        console.log(match);
         if (match !== null) {
             var results = match.split('# ');
             if (results.length > 2) {
-                arrayToReturn.push(results.slice(1, results.length - 1));
+                arrayToReturn = arrayToReturn.concat(results.slice(1, results.length - 1));
             } else if (results.length = 2) {
-                arrayToReturn.push(results.slice(1));
+                arrayToReturn = arrayToReturn.concat(results.slice(1));
             }
         }
     }
