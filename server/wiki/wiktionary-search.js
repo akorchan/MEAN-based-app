@@ -81,8 +81,31 @@ function parseWikiResponse(textToParse, parsedElement) {
 }
 
 function cleanupResultsArray(results) {
-    //TODO remove redundant symbols
+    for (var i = 0; i < results.length; i++) {
+        results[i] = parseWikiText(results[i]);
+    }
     return results;
+}
+
+//TODO improve
+function parseWikiText(s) {
+    // e.g. {{Persondata|NAME=Gordh, Gordon|ALTERNATIVE NAMES=|SHORT DESCRIPTION=Entomologist|DATE OF BIRTH=1945|PLACE OF BIRTH=[[USA]]|DATE OF DEATH=|PLACE OF DEATH=USA}}
+    s = s.split(/\|[A-Z ]{5,100}/)[0];
+
+    var pattern = /\[\[(.*?)\]\]/g,
+        output = s,
+        m;
+
+    // e.g. | SHORT DESCRIPTION=[[United States Senate|U.S. Senator]] from [[Massachusetts]], [[John Kerry presidential campaign, 2004|2004 presidential nominee]] for the [[Democratic Party (United States)|Democratic Party]]
+    while (m = pattern.exec(s)) {
+        if (m[1].split("|").length > 1) {
+            var sub = m[1].split("|")[1];
+        } else {
+            var sub = m[1];
+        }
+        output = output.replace(m[0], sub);
+    }
+    return output.replace(/\s+/g, " ");
 }
 
 function cleanupOpenSearchResults(results) {
@@ -99,11 +122,11 @@ exports.meaning = meaning;
 exports.openSearch = openSearch;
 
 /*
-    testing regex: http://regex101.com/
-    words for testing:
-    наречеие - на двух языказ значение из разных частей речи (по два для каждого языка)
-    конформизм - одно значение
-    нонконформизм - три значение
+ testing regex: http://regex101.com/
+ words for testing:
+ наречеие - на двух языказ значение из разных частей речи (по два для каждого языка)
+ конформизм - одно значение
+ нонконформизм - три значение
  */
 
 
