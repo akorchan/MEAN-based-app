@@ -45,7 +45,6 @@ function performRequest(url, callback) {
     req.end();
 }
 
-
 function parsreLanguagePart(textToParse, lang) {
     textToParse = textToParse + '{{-xx-}}'
     var found = [];
@@ -66,10 +65,9 @@ function parseWikiResponse(textToParse, parsedElement) {
         foundedMatches.push(found[0]);
     }
     for (var i = 0; i < foundedMatches.length; i++) {
-        var match = foundedMatches[i];
-        console.log(match);
+        var match = foundedMatches[i].replace(new RegExp('=', 'g'), '')
         if (match !== null) {
-            var results = match.split('# ');
+            var results = match.split('#');
             if (results.length > 2) {
                 arrayToReturn = arrayToReturn.concat(results.slice(1, results.length - 1));
             } else if (results.length = 2) {
@@ -82,7 +80,7 @@ function parseWikiResponse(textToParse, parsedElement) {
 
 function cleanupResultsArray(results) {
     for (var i = 0; i < results.length; i++) {
-        results[i] = parseWikiText(results[i]);
+        results[i] = extractParts(parseWikiText(results[i]));
     }
     return results;
 }
@@ -92,20 +90,33 @@ function parseWikiText(s) {
     // e.g. {{Persondata|NAME=Gordh, Gordon|ALTERNATIVE NAMES=|SHORT DESCRIPTION=Entomologist|DATE OF BIRTH=1945|PLACE OF BIRTH=[[USA]]|DATE OF DEATH=|PLACE OF DEATH=USA}}
     s = s.split(/\|[A-Z ]{5,100}/)[0];
 
-    var pattern = /\[\[(.*?)\]\]/g,
-        output = s,
-        m;
+    var pattern = /\[\[(.*?)\]\]/g;
+    var output = s;
+    var m = [];
 
     // e.g. | SHORT DESCRIPTION=[[United States Senate|U.S. Senator]] from [[Massachusetts]], [[John Kerry presidential campaign, 2004|2004 presidential nominee]] for the [[Democratic Party (United States)|Democratic Party]]
     while (m = pattern.exec(s)) {
-        if (m[1].split("|").length > 1) {
-            var sub = m[1].split("|")[1];
+        if (m[1].split('|').length > 1) {
+            var sub = m[1].split('|')[1];
         } else {
             var sub = m[1];
         }
         output = output.replace(m[0], sub);
     }
-    return output.replace(/\s+/g, " ");
+    //hide links markup
+    output = output.replace(/\[|\]/, '');
+    //replace spaces
+    output = output.replace(/\s+/g, ' ');
+    return extractParts(output);
+}
+
+function extractParts(textToParse) {
+    //remove redundant highlights (e.g. {{text}})
+    textToParse = textToParse.replace(new RegExp('{{[^|]*}}\\s*', 'g'), '')
+    //removing specific parts (e.g. {{пример|Великий мыслитель прошлого}})
+    //TODO replace removing with extracting all parts to separate array
+    textToParse = textToParse.replace(new RegExp('{{.*[|].*}}', 'g'), '')
+    return textToParse;
 }
 
 function cleanupOpenSearchResults(results) {
